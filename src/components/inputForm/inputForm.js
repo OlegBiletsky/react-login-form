@@ -1,9 +1,9 @@
 import React from 'react';
+import './inputForm.css';
 
 const emailRegex = RegExp(
     /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
 );
-
 function validateEmail(email) {
     const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
@@ -77,13 +77,10 @@ class InputForm extends React.Component {
 
     render() {
         return(
-            <div className='main-container'>
-                <div className='main-container'>
+            <div className="main-container">
 
-
-                    <h1>SIGN IN TO YOUR ACCOUNT</h1>
-                    <form onSubmit={this.handleSubmitForm} noValidate>
-
+                    <form className="form" onSubmit={this.handleSubmitForm} noValidate>
+                        <h1 className="title-h1">SIGN IN TO YOUR ACCOUNT</h1>
 
 
                         <input
@@ -96,59 +93,56 @@ class InputForm extends React.Component {
                             onChange={this.handleChangeEmailInput}
                         />
                         {this.state.errorEmail && (
-                                <span className="errorMessage">{this.state.errorEmail}</span>
+                                <span className="errorEmailMessage">{this.state.errorEmail}</span>
                             )}
 
 
 
 
-
-                        <input
-                            className='password-field'
-                            name='password-input'
-                            type={this.state.hiddenPass ? 'text' : 'password'}
-                            placeholder="password"
-                            value={this.state.password}
-                            onChange={this.handleChangePasswordInput}
-                        />
-                        <button onClick={(e) => {e.preventDefault() 
-                                    return  this.setState({
-                                    hiddenPass:!this.state.hiddenPass})      
-                            }
-                        }>
-                        Show / Hide
-                        </button>
-                        {this.state.errorPassword && (
-                            <span className="errorMessage">{this.state.errorPassword}</span>
-                        )}
-
-
-
+                        <div className='password-section'>
+                            <input
+                                className='password-field'
+                                name='password-input'
+                                type={this.state.hiddenPass ? 'text' : 'password'}
+                                placeholder="password"
+                                value={this.state.password}
+                                onChange={this.handleChangePasswordInput}
+                            />
+                            <button className="btn-show-pass" onClick={(e) => {e.preventDefault() 
+                                        return  this.setState({
+                                        hiddenPass:!this.state.hiddenPass})      
+                                }
+                            }>
+                            Show / Hide
+                            </button>
+                            {this.state.errorPassword && (
+                                <span className="errorPassMessage">{this.state.errorPassword}</span>
+                            )}
+                        </div>
 
 
 
 
+
+                        <label for='checkbox-input' className='label-for-checkbox'>Keep me signed in</label>
                         <input
                             className='checkbox-field'
                             name='checkbox-input' 
                             type='checkbox'
                             checked={this.state.checkbox} 
-                            required
                             onChange={this.handleChangeCheckboxInput}
                         />
                         {this.state.errorCheckbox && (
-                            <span className="errorMessage">{this.state.errorCheckbox}</span>
+                            <span className="errorCheckboxMessage">{this.state.errorCheckbox}</span>
                         )}
-                        <label for='checkbox-input' className='label-for-checkbox'>Keep me signed in</label>
 
 
 
 
-                        <button className='submit-btn' type='submit' >Sign in</button>
-                        
+                        <button className='submit-form-btn' type='submit' >Sign in</button>
+
                     </form>
 
-                </div>
             </div>
         )
     }
