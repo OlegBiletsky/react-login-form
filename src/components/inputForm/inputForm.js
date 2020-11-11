@@ -35,7 +35,7 @@ class InputForm extends React.Component {
 
         if (!emailRegex.test(e.target.value)) {
             this.setState((state)=>{
-                return {errorEmail: "Перевірте коректність емейлу"}
+                return {errorEmail: "*Перевірте коректність емейлу"}
             })
         } else {
             this.setState({errorEmail: true})
@@ -45,7 +45,7 @@ class InputForm extends React.Component {
         this.setState({password: e.target.value})
         if (e.target.value === null || e.target.value.length <8) {
             this.setState((state)=>{
-                return {errorPassword: "Мінімум 8 символів"}
+                return {errorPassword: "*Мінімум 8 символів"}
             })
         } else {
             this.setState({errorPassword: true})
@@ -55,10 +55,10 @@ class InputForm extends React.Component {
         this.setState({checkbox: !this.state.checkbox})
         if (e.target.checked === false) {
             this.setState((state)=>{
-                return {errorCheckbox: "Вам доведеться вводити щоразу Ваші дані"}
+                return {errorCheckbox: "*Вам доведеться вводити щоразу Ваші дані"}
             })
         } else {
-            this.setState({errorCheckbox: "Ми надійно запам'ятали Вас"})
+            this.setState({errorCheckbox: "*Ми надійно запам'ятали Вас"})
         }
     }
     // handleChangeInput(e){
@@ -80,22 +80,23 @@ class InputForm extends React.Component {
             <div className="main-container">
 
                     <form className="form" onSubmit={this.handleSubmitForm} noValidate>
+
                         <h1 className="title-h1">SIGN IN TO YOUR ACCOUNT</h1>
 
-
-                        <input
-                            className='email-field'
-                            name='email-input'
-                            type='email'
-                            placeholder="E-mail"
-                            value={this.state.email}
-                            
-                            onChange={this.handleChangeEmailInput}
-                        />
-                        {this.state.errorEmail && (
-                                <span className="errorEmailMessage">{this.state.errorEmail}</span>
+                        <div className="email-section">
+                            <input
+                                className='email-field'
+                                name='email-input'
+                                type='email'
+                                placeholder="E-mail"
+                                value={this.state.email}
+                                onChange={this.handleChangeEmailInput}
+                                autocomplete='off'
+                            />
+                            {this.state.errorEmail && (
+                                    <div className="errorEmailMessage">{this.state.errorEmail}</div>
                             )}
-
+                        </div>
 
 
 
@@ -107,34 +108,35 @@ class InputForm extends React.Component {
                                 placeholder="password"
                                 value={this.state.password}
                                 onChange={this.handleChangePasswordInput}
+                                autocomplete='off'
                             />
-                            <button className="btn-show-pass" onClick={(e) => {e.preventDefault() 
-                                        return  this.setState({
-                                        hiddenPass:!this.state.hiddenPass})      
-                                }
-                            }>
-                            Show / Hide
-                            </button>
+                            <button className="btn-show-pass" onClick={(e) => {e.       preventDefault() 
+                                            return  this.setState({
+                                            hiddenPass:!this.state.hiddenPass})      
+                                    }
+                            }>Show / Hide</button>
                             {this.state.errorPassword && (
-                                <span className="errorPassMessage">{this.state.errorPassword}</span>
+                                <div className="errorPassMessage">{this.state.errorPassword}</div>
                             )}
                         </div>
 
 
 
 
-
-                        <label for='checkbox-input' className='label-for-checkbox'>Keep me signed in</label>
-                        <input
-                            className='checkbox-field'
-                            name='checkbox-input' 
-                            type='checkbox'
-                            checked={this.state.checkbox} 
-                            onChange={this.handleChangeCheckboxInput}
-                        />
-                        {this.state.errorCheckbox && (
-                            <span className="errorCheckboxMessage">{this.state.errorCheckbox}</span>
-                        )}
+                        <div className='checkbox-section'>
+                            
+                            <input
+                                className='checkbox-field'
+                                name='checkbox-input' 
+                                type='checkbox'
+                                checked={this.state.checkbox} 
+                                onChange={this.handleChangeCheckboxInput}
+                            />
+                            <label for='checkbox-input' className='label-for-checkbox'>Keep me signed in</label>
+                            {this.state.errorCheckbox && (
+                                <span className="errorCheckboxMessage">{this.state.errorCheckbox}</span>
+                            )}
+                        </div>
 
 
 
