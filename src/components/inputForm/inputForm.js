@@ -35,7 +35,7 @@ class InputForm extends React.Component {
 
         if (!emailRegex.test(e.target.value)) {
             this.setState((state)=>{
-                return {errorEmail: "*Перевірте коректність емейлу"}
+                return {errorEmail: "*Перевірте коректність імейлу"}
             })
         } else {
             this.setState({errorEmail: true})
